@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import CategoryHero from '@/components/category/CategoryHero';
-import ProductGrid from '@/components/category/ProductGrid';
-import CategoryCTA from '@/components/category/CategoryCTA';
-import ProcessSteps from '@/components/category/ProcessSteps';
+// import CategoryHero from '@/components/category/CategoryHero';
+// import ProductGrid from '@/components/category/ProductGrid';
+// import CategoryCTA from '@/components/category/CategoryCTA';
+// import ProcessSteps from '@/components/category/ProcessSteps';
 import { getCategoryBySlug, serviceCategories } from '@/lib/data/services';
 
 interface CategoryPageProps {
@@ -93,10 +93,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <CategoryHero category={category} />
+      {/* <CategoryHero category={category} />
       <ProductGrid products={category.products} categorySlug={category.slug} />
       <ProcessSteps categoryId={category.id} />
-      <CategoryCTA category={category} />
+      <CategoryCTA category={category} /> */}
     </>
   );
 }
