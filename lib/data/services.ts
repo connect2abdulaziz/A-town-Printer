@@ -5,6 +5,7 @@ export interface ServiceCategory {
   shortDescription: string;
   description: string;
   examples: string[];
+  icon?: 'shirt' | 'maximize' | 'file-text';
 }
 
 /**
@@ -12,6 +13,8 @@ export interface ServiceCategory {
  * 1. Clothing & Apparel Printing
  * 2. Large Format Printing & Displays
  * 3. Print Marketing Products
+ * 
+ * Note: Products are managed separately in lib/data/products.ts
  */
 export const serviceCategories: ServiceCategory[] = [
   {
@@ -22,6 +25,7 @@ export const serviceCategories: ServiceCategory[] = [
     description:
       "Professional workwear, branded clothing, and apparel personalisation. From team uniforms to promotional wear.",
     examples: ["Workwear", "Branded clothing", "Apparel personalisation"],
+    icon: "shirt",
   },
   {
     id: "large-format",
@@ -31,6 +35,7 @@ export const serviceCategories: ServiceCategory[] = [
     description:
       "Gazebos, banners, signage, and display products for events, retail, and outdoor promotion.",
     examples: ["Gazebos", "Banners", "Signage", "Display products"],
+    icon: "maximize",
   },
   {
     id: "print-marketing",
@@ -40,9 +45,14 @@ export const serviceCategories: ServiceCategory[] = [
     description:
       "Flyers, posters, business cards, poster boards, and other print marketing materials.",
     examples: ["Flyers", "Posters", "Business cards", "Poster boards"],
+    icon: "file-text",
   },
 ];
 
 export function getCategoryBySlug(slug: string): ServiceCategory | undefined {
   return serviceCategories.find((c) => c.slug === slug);
+}
+
+export function getAllCategories(): ServiceCategory[] {
+  return serviceCategories;
 }

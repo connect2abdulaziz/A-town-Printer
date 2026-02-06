@@ -77,19 +77,19 @@ export default function TrustSignals() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group"
               >
-                <div className="bg-card border border-border rounded-xl p-6 h-full hover:border-accent/50 hover:shadow-xl transition-all duration-300">
+                <div className="bg-primary border border-border rounded-xl p-6 h-full hover:border-accent/50 hover:shadow-xl transition-all duration-300">
                   <div className="flex items-start space-x-4">
                     {/* Icon */}
-                    <div className={`flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-accent/10 to-success/10 flex items-center justify-center ${point.color} group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`flex-shrink-0 w-12 h-12 rounded-lg bg-accent flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                       <Icon className="w-6 h-6" />
                     </div>
                     
                     {/* Content */}
                     <div className="flex-1">
-                      <h3 className="text-lg font-bold text-card-foreground mb-2">
+                      <h3 className="text-lg font-bold text-accent mb-2">
                         {point.title}
                       </h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                      <p className="text-muted text-sm leading-relaxed">
                         {point.description}
                       </p>
                     </div>
