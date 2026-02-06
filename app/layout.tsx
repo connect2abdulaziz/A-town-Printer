@@ -1,13 +1,20 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Playfair_Display, Poppins } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
-const inter = Inter({ 
+const playfairDisplay = Playfair_Display({ 
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter'
+  variable: '--font-playfair'
+});
+
+const poppins = Poppins({ 
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-poppins'
 });
 
 export const metadata: Metadata = {
@@ -44,8 +51,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="antialiased">
+    <html lang="en" className={`${playfairDisplay.variable} ${poppins.variable}`}>
+      <body className={`antialiased ${poppins.className}`}>
         <Header />
         <main className="min-h-screen">
           {children}
