@@ -29,7 +29,7 @@ export default function Hero() {
               transition={{ delay: 0.2 }}
               className="inline-block mb-4"
             >
-              <span className="inline-flex items-center px-4 py-2 rounded-full bg-success/20 text-success-foreground text-sm font-medium">
+              <span className="inline-flex items-center px-4 py-2 rounded-full bg-card text-success-foreground text-sm font-medium">
                 🇬🇧 London-Based Professional Printing
               </span>
             </motion.div>
