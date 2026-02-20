@@ -3,6 +3,8 @@ export interface Product {
   name: string;
   slug: string;
   category: string;
+  /** Optional group for display (e.g. 'gazebos' – all gazebo products shown together under Large Format) */
+  productGroup?: string;
   description?: string;
   image?: string;
   price?: string;
@@ -38,13 +40,22 @@ export const products: Product[] = [
     category: "clothing",
     description: "Professional work jackets with custom embroidery or printing.",
   },
-  // Large format products
+  // Large format products – gazebo-related grouped together
   {
     id: "gazebos",
     name: "Custom Gazebos",
     slug: "gazebos",
     category: "large-format",
+    productGroup: "gazebos",
     description: "Weather-resistant gazebos with custom branding for outdoor events.",
+  },
+  {
+    id: "pop-up-gazebos",
+    name: "Pop-up Gazebos",
+    slug: "pop-up-gazebos",
+    category: "large-format",
+    productGroup: "gazebos",
+    description: "Portable pop-up gazebos with printed graphics for events and promotions.",
   },
   {
     id: "banners",

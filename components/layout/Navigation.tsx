@@ -2,11 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { serviceCategories } from "@/lib/data/services";
 
-const links = [
-  { href: "/clothing", label: "Clothing & Apparel" },
-  { href: "/large-format", label: "Large Format" },
-  { href: "/print-marketing", label: "Print Marketing" },
+const mainNavLinks = [
+  ...serviceCategories.map((c) => ({ href: `/${c.slug}`, label: c.navLabel })),
   { href: "/quote", label: "Quote" },
   { href: "/upload", label: "Upload" },
 ];
@@ -17,13 +16,13 @@ export function Navigation() {
   return (
     <nav aria-label="Main">
       <ul className="flex flex-wrap items-center gap-4 sm:gap-6">
-        {links.map(({ href, label }) => {
+        {mainNavLinks.map(({ href, label }) => {
           const isActive = pathname === href || (href !== "/" && pathname.startsWith(href));
           return (
             <li key={href}>
               <Link
                 href={href}
-                className={`text-sm font-medium transition-colors hover:text-accent ${
+                className={`text-sm font-medium transition-colors hover:text-accent rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
                   isActive ? "text-accent" : "text-muted-foreground"
                 }`}
               >

@@ -30,7 +30,7 @@ export default function Hero() {
               className="inline-block mb-4"
             >
               <span className="inline-flex items-center px-4 py-2 rounded-full bg-success/20 text-success-foreground text-sm font-medium">
-                🇬🇧 UK-Based Professional Printing
+                🇬🇧 London-Based Professional Printing
               </span>
             </motion.div>
 
@@ -40,9 +40,9 @@ export default function Hero() {
               transition={{ delay: 0.3 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
             >
-              Quality Printing,{' '}
+              Fast London Printing,{' '}
               <span className="text-accent bg-clip-text">
-                Fast Turnaround
+                Reliable Turnaround
               </span>
             </motion.h1>
 
@@ -53,7 +53,7 @@ export default function Hero() {
               className="text-lg sm:text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto lg:mx-0"
             >
               From branded workwear to event displays and marketing materials – 
-              we deliver professional printing services across the UK with expertise you can trust.
+              we deliver fast, reliable professional printing across London with expertise you can trust.
             </motion.p>
 
             <motion.div
@@ -64,7 +64,7 @@ export default function Hero() {
             >
               <Link
                 href="/quote"
-                className="group inline-flex items-center justify-center px-8 py-4 bg-accent text-accent-foreground rounded-lg font-semibold text-lg hover:bg-accent-hover transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
+                className="group inline-flex items-center justify-center px-8 py-4 bg-accent text-accent-foreground rounded-lg font-semibold text-lg hover:bg-accent-hover transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
               >
                 Get a Quote
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -72,7 +72,7 @@ export default function Hero() {
 
               <Link
                 href="/upload"
-                className="group inline-flex items-center justify-center px-8 py-4 bg-card text-card-foreground border-2 border-border rounded-lg font-semibold text-lg hover:bg-muted transition-all duration-200"
+                className="group inline-flex items-center justify-center px-8 py-4 bg-card text-card-foreground border-2 border-border rounded-lg font-semibold text-lg hover:bg-muted transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
               >
                 <Upload className="mr-2 h-5 w-5" />
                 Upload Artwork

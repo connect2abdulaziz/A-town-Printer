@@ -4,7 +4,7 @@ import { Upload, Shield, FileCheck } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Upload Artwork | A-Town Printers',
-  description: 'Upload your artwork files for printing. We support JPG, PNG, PDF, AI, EPS, PSD, and ZIP files up to 1GB.',
+  description: 'Send your artwork files for printing. Fast, reliable service. We accept JPG, PNG, PDF, AI, EPS, PSD, and ZIP files up to 1GB.',
 };
 
 export default function UploadPage() {
@@ -88,7 +88,7 @@ export default function UploadPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-2xl shadow-xl border-2 border-border/50 p-6 lg:p-8 bg-gradient-to-b from-white to-muted/20">
               <div className="mb-6 pb-6 border-b border-border/50">
-                <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-2 text-center">Upload Files</h2>
+                <h2 className="text-2xl lg:text-3xl font-bold text-accent mb-2 text-center">Upload Files</h2>
                 <p className="text-muted-foreground text-sm text-center">
                   Upload your artwork files below. We support multiple file formats up to 1GB per file.
                 </p>

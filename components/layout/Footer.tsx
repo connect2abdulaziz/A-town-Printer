@@ -1,14 +1,16 @@
 import Link from 'next/link';
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Shield, MapPinned } from 'lucide-react';
 import { serviceCategories } from '@/lib/data/services';
+import { AI_POLICY_TEXT, GOOGLE_MAPS_EMBED_URL, CONTACT_PHONE } from '@/lib/constants';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-primary text-primary-foreground">
+      {/* Main footer columns – constrained width */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-0">
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-3 mb-6">
@@ -21,7 +23,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-primary-foreground/80 text-sm mb-6 leading-relaxed">
-              Professional printing services across the UK. Quality prints, fast turnaround, 
+              Professional printing services across London. Quality prints, fast turnaround, 
               and exceptional customer service.
             </p>
             <div className="flex space-x-4">
@@ -65,7 +67,7 @@ export default function Footer() {
                     href={`/${category.slug}`}
                     className="text-primary-foreground/80 hover:text-accent transition-colors text-sm"
                   >
-                    {category.title.split(' & ')[0]}
+                    {category.navLabel}
                   </Link>
                 </li>
               ))}
@@ -141,13 +143,13 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="tel:+44XXXXXXXXX"
+                  href={`tel:+44${CONTACT_PHONE.trim().replace(/^0/, '').replace(/\s/g, '')}`}
                   className="flex items-start space-x-3 text-primary-foreground/80 hover:text-accent transition-colors group"
                 >
                   <Phone className="w-5 h-5 mt-0.5 group-hover:scale-110 transition-transform" />
                   <div>
                     <div className="text-sm font-medium">Call Us</div>
-                    <div className="text-sm">+44 XXX XXX XXXX</div>
+                    <div className="text-sm">{CONTACT_PHONE.trim()}</div>
                   </div>
                 </a>
               </li>
@@ -169,8 +171,8 @@ export default function Footer() {
                   <div>
                     <div className="text-sm font-medium">Location</div>
                     <div className="text-sm">
-                      United Kingdom<br />
-                      Nationwide Service
+                      London<br />
+                      Serving London & surrounding areas
                     </div>
                   </div>
                 </div>
@@ -178,15 +180,73 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-primary-foreground/10">
+      {/* Trust & Legal – full-width band: content on top, then edge-to-edge map */}
+      <section
+        className="border-t border-primary-foreground/10 bg-primary-foreground/5"
+        aria-labelledby="trust-legal-heading"
+      >
+        <h2 id="trust-legal-heading" className="sr-only">
+          Trust & Legal
+        </h2>
+        {/* Content block: AI Policy + Find Us heading – constrained, centered */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
+          <div className="flex flex-col gap-10 lg:gap-12">
+            <div className="max-w-3xl">
+              <div className="flex items-center gap-3 mb-3">
+                <span
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent"
+                  aria-hidden
+                >
+                  <Shield className="h-4 w-4" />
+                </span>
+                <h3 className="font-bold text-base uppercase tracking-wide text-primary-foreground/90">
+                  AI Usage & Accuracy Notice
+                </h3>
+              </div>
+              <p className="text-primary-foreground/80 text-sm leading-relaxed whitespace-pre-line pl-12">
+                {AI_POLICY_TEXT}
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <span
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent"
+                aria-hidden
+              >
+                <MapPinned className="h-4 w-4" />
+              </span>
+              <h3 className="font-bold text-base uppercase tracking-wide text-primary-foreground/90">
+                Find Us
+              </h3>
+            </div>
+          </div>
+        </div>
+        {/* Map – true full width, no side padding */}
+        <div className="w-full h-[340px] sm:h-[380px] lg:h-[420px]">
+          <iframe
+            src={GOOGLE_MAPS_EMBED_URL}
+            width="100%"
+            height="100%"
+            style={{ border: 0, display: 'block' }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="A-Town Printers location map"
+            className="w-full h-full block"
+          />
+        </div>
+      </section>
+
+      {/* Bottom Bar – constrained width */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="pt-8 pb-8 border-t border-primary-foreground/10">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-primary-foreground/60">
               © {currentYear} A-Town Printers. All rights reserved.
             </div>
             <div className="flex items-center space-x-6 text-sm text-primary-foreground/60">
-              <span>🇬🇧 Proudly UK-Based</span>
+              <span>🇬🇧 Proudly London-Based</span>
               <span>•</span>
               <span>✓ Quality Guaranteed</span>
               <span>•</span>

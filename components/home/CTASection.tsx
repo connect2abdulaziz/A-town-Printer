@@ -42,8 +42,8 @@ export default function CTASection() {
                 transition={{ delay: 0.3 }}
                 className="text-lg text-primary-foreground/90"
               >
-                Get your printing project underway in minutes. Upload your artwork, 
-                request a quote, or speak with our expert team.
+                Request a quote, upload your artwork, or speak with our expert team 
+                for reliable, professional print services.
               </motion.p>
             </div>
 
@@ -58,7 +58,7 @@ export default function CTASection() {
               {/* Quote CTA */}
               <Link
                 href="/quote"
-                className="group bg-accent hover:bg-accent-hover text-accent-foreground rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="group bg-accent hover:bg-accent-hover text-accent-foreground rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
               >
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-accent-foreground/10 rounded-lg flex items-center justify-center group-hover:bg-accent-foreground/20 transition-colors">
@@ -67,7 +67,7 @@ export default function CTASection() {
                   <div className="flex-1">
                     <h3 className="font-bold text-lg mb-1">Get a Quote</h3>
                     <p className="text-sm text-accent-foreground/90 mb-3">
-                      Tell us about your project and receive a detailed quote
+                      Tell us about your project and receive a detailed quote with fast turnaround
                     </p>
                     <div className="flex items-center text-sm font-semibold">
                       Start now
@@ -80,7 +80,7 @@ export default function CTASection() {
               {/* Upload CTA */}
               <Link
                 href="/upload"
-                className="group bg-card hover:bg-muted text-card-foreground rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-border"
+                className="group bg-card hover:bg-muted text-card-foreground rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
               >
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center group-hover:bg-accent/20 transition-colors">
@@ -102,7 +102,7 @@ export default function CTASection() {
               {/* Contact CTA */}
               <Link
                 href="tel:+44XXXXXXXXX"
-                className="group bg-card hover:bg-muted text-card-foreground rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-border sm:col-span-2 lg:col-span-1"
+                className="group bg-card hover:bg-muted text-card-foreground rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-border sm:col-span-2 lg:col-span-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
               >
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-success/10 rounded-lg flex items-center justify-center group-hover:bg-success/20 transition-colors">
@@ -114,7 +114,7 @@ export default function CTASection() {
                       Speak with our team for expert advice and support
                     </p>
                     <div className="flex items-center text-sm font-semibold text-success">
-                      +44 XXX XXX XXXX
+                         07508 729 279
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -133,7 +133,7 @@ export default function CTASection() {
           className="mt-12 text-center"
         >
           <p className="text-muted-foreground text-sm">
-            Files too large to email? No problem. Our upload system handles files up to 1GB.
+            Files too large to email? You can send files up to 1GB via our upload page.
           </p>
         </motion.div>
       </div>

@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   
   const keywords = [
     category.title.toLowerCase(),
-    'printing services UK',
+    'printing services London',
     'professional printing',
     ...products.map(p => p.name.toLowerCase()),
     ...category.examples.map(e => e.toLowerCase()),
@@ -77,8 +77,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       url: 'https://atownprinters.co.uk',
     },
     areaServed: {
-      '@type': 'Country',
-      name: 'United Kingdom',
+      '@type': 'City',
+      name: 'London',
     },
     ...(products.length > 0 && {
       hasOfferCatalog: {

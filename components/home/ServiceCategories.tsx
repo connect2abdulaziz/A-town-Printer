@@ -32,7 +32,7 @@ export default function ServiceCategories({ categories }: ServiceCategoriesProps
             Our Printing Services
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Professional printing solutions tailored to your business needs. 
+            Fast turnaround, reliable delivery, and professional print services tailored to your business. 
             Choose from our three core service categories.
           </p>
         </motion.div>
@@ -52,7 +52,7 @@ export default function ServiceCategories({ categories }: ServiceCategoriesProps
               >
                 <Link
                   href={`/${category.slug}`}
-                  className="group block h-full"
+                  className="group block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                 >
                   <div className="relative h-full bg-primary/95 border-2 border-border rounded-2xl p-8 hover:border-accent transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
                     {/* Icon container */}
@@ -95,7 +95,7 @@ export default function ServiceCategories({ categories }: ServiceCategoriesProps
 
                     {/* CTA */}
                     <div className="flex items-center text-accent font-semibold group-hover:translate-x-2 transition-transform">
-                      Explore {category.title.split(' ')[0]}
+                      View {category.navLabel}
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </div>
 
@@ -121,7 +121,7 @@ export default function ServiceCategories({ categories }: ServiceCategoriesProps
           </p>
           <Link
             href="/quote"
-            className="inline-flex items-center px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary-hover transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary-hover transition-all duration-200 shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             Get Expert Advice
             <ArrowRight className="ml-2 h-5 w-5" />

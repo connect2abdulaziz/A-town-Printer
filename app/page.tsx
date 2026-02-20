@@ -1,12 +1,13 @@
 import Hero from '@/components/home/Hero';
 import ServiceCategories from '@/components/home/ServiceCategories';
 import TrustSignals from '@/components/home/TrustSignals';
+import LondonLocalization from '@/components/home/LondonLocalization';
 import CTASection from '@/components/home/CTASection';
 import { serviceCategories } from '@/lib/data/services';
 
 export const metadata = {
-  title: 'A-Town Printers | Professional Printing Services UK',
-  description: 'UK-based professional printing services including clothing & apparel printing, large format displays, and print marketing products. Fast turnaround, quality guaranteed.',
+  title: 'A-Town Printers | Professional Printing Services London',
+  description: 'London-based professional printing services including clothing & apparel printing, large format displays, and print marketing products. Fast turnaround, quality guaranteed.',
 };
 
 export default function HomePage() {
@@ -14,7 +15,7 @@ export default function HomePage() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'A-Town Printers',
-    description: 'Professional printing services in the UK',
+    description: 'Professional printing services in London',
     url: 'https://atownprinters.co.uk',
     telephone: '+44-XXX-XXX-XXXX',
     address: {
@@ -22,8 +23,8 @@ export default function HomePage() {
       addressCountry: 'GB'
     },
     serviceArea: {
-      '@type': 'Country',
-      name: 'United Kingdom'
+      '@type': 'City',
+      name: 'London'
     },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
@@ -48,6 +49,7 @@ export default function HomePage() {
       <Hero />
       <ServiceCategories categories={serviceCategories} />
       <TrustSignals />
+      <LondonLocalization />
       <CTASection />
     </>
   );

@@ -128,7 +128,7 @@ export default function UploadForm() {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-success/10 mb-4">
           <CheckCircle className="w-8 h-8 text-success" />
         </div>
-        <h3 className="text-2xl font-bold text-foreground mb-2">Files Uploaded Successfully!</h3>
+        <h3 className="text-2xl font-bold text-accent mb-2">Files Uploaded Successfully!</h3>
         <p className="text-muted-foreground mb-6">
           We&apos;ve received your files and will review them shortly. We&apos;ll be in touch soon.
         </p>
@@ -147,7 +147,7 @@ export default function UploadForm() {
       {/* Row 1: Name and Email */}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label htmlFor="name" className="block text-sm font-semibold text-foreground">
+          <label htmlFor="name" className="block text-sm font-semibold text-accent">
             Full Name <span className="text-accent">*</span>
           </label>
           <input
@@ -155,13 +155,13 @@ export default function UploadForm() {
             name="name"
             type="text"
             required
-            className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-colors"
+            className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-accent placeholder:text-muted-foreground focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/20 transition-colors"
             placeholder="John Doe"
           />
         </div>
 
         <div className="space-y-1.5">
-          <label htmlFor="email" className="block text-sm font-semibold text-foreground">
+          <label htmlFor="email" className="block text-sm font-semibold text-accent">
             Email Address <span className="text-accent">*</span>
           </label>
           <input
@@ -169,7 +169,7 @@ export default function UploadForm() {
             name="email"
             type="email"
             required
-            className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-colors"
+            className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-accent placeholder:text-muted-foreground focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/20 transition-colors"
             placeholder="john@example.com"
           />
         </div>
@@ -177,7 +177,7 @@ export default function UploadForm() {
 
       {/* File Upload Area */}
       <div className="space-y-1.5">
-        <label className="block text-sm font-semibold text-foreground">
+        <label className="block text-sm font-semibold text-accent">
           Artwork Files <span className="text-accent">*</span>
         </label>
         <div
@@ -201,7 +201,7 @@ export default function UploadForm() {
           <Upload className={`mx-auto h-12 w-12 mb-4 transition-colors ${
             dragActive ? 'text-accent' : 'text-muted-foreground'
           }`} />
-          <p className="text-lg font-medium mb-2 text-foreground">
+          <p className="text-lg font-medium mb-2 text-accent">
             Drop files here or click to upload
           </p>
           <p className="text-sm text-muted-foreground">
@@ -227,7 +227,7 @@ export default function UploadForm() {
                 exit={{ opacity: 0, x: 20 }}
                 className="flex items-center justify-between p-3 bg-muted/50 rounded-lg border border-border"
               >
-                <span className="text-sm truncate flex-1 text-foreground">{file.name}</span>
+                <span className="text-sm truncate flex-1 text-accent">{file.name}</span>
                 <span className="text-xs text-muted-foreground mx-3">
                   {(file.size / 1024 / 1024).toFixed(2)} MB
                 </span>

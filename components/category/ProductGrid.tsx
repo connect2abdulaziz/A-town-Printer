@@ -6,6 +6,19 @@ import Image from 'next/image';
 import { ShoppingCart, Eye } from 'lucide-react';
 import { Product } from '@/lib/data/products';
 
+/** Group products for large-format: gazebos first, then banners/signage/displays */
+function groupProductsForDisplay(products: Product[], categorySlug: string): { groupLabel: string; products: Product[] }[] {
+  if (categorySlug !== 'large-format') {
+    return [{ groupLabel: '', products }];
+  }
+  const gazebos = products.filter((p) => p.productGroup === 'gazebos');
+  const others = products.filter((p) => p.productGroup !== 'gazebos');
+  const result: { groupLabel: string; products: Product[] }[] = [];
+  if (gazebos.length > 0) result.push({ groupLabel: 'Gazebos', products: gazebos });
+  if (others.length > 0) result.push({ groupLabel: 'Banners, Signage & Displays', products: others });
+  return result;
+}
+
 interface ProductGridProps {
   products: Product[];
   categorySlug: string;
@@ -21,6 +34,7 @@ const getDefaultPrice = (product: Product) => {
     'hoodies': 'From £29.99',
     'jackets': 'From £49.99',
     'gazebos': 'From £199.99',
+    'pop-up-gazebos': 'From £249.99',
     'banners': 'From £39.99',
     'signage': 'From £79.99',
     'display-stands': 'From £59.99',
@@ -89,97 +103,99 @@ export default function ProductGrid({ products, categorySlug }: ProductGridProps
           </p>
         </motion.div>
 
-        {/* Product Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {products.map((product, index) => {
-            const productPrice = getDefaultPrice(product);
-            
-            return (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 40 }}
+        {/* Product Grid (grouped for large-format: Gazebos, then Banners/Signage/Displays) */}
+        {groupProductsForDisplay(products, categorySlug).map(({ groupLabel, products: groupProducts }) => (
+          <div key={groupLabel || 'all'} className="mb-14 last:mb-0">
+            {groupLabel && (
+              <motion.h3
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: index * 0.1,
-                  ease: [0.25, 0.46, 0.45, 0.94]
-                }}
-                className="group h-full"
+                viewport={{ once: true }}
+                className="text-xl font-bold text-foreground mb-6 pb-2 border-b border-border"
               >
-                <div className="relative h-full bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-border/50 hover:border-accent/50 hover:-translate-y-2 bg-gradient-to-b from-white to-muted/20">
-                  {/* Top Accent Line */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-accent-hover to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {groupLabel}
+              </motion.h3>
+            )}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {groupProducts.map((product, index) => {
+                const productPrice = getDefaultPrice(product);
 
-                  {/* Image Section */}
-                  <div className="relative h-64 bg-white overflow-hidden flex items-center justify-center p-4">
-                    {/* Product Image */}
-                    <Image
-                      src="/images/jacket.webp"
-                      alt={product.name}
-                      fill
-                      className="object-contain group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      priority={index < 3}
-                    />
-                    
-                    {/* Hover Overlay with Action Buttons */}
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                      className="absolute inset-0 bg-primary/20 backdrop-blur-sm flex flex-col items-center justify-center gap-4 z-10 transition-opacity duration-300"
-                    >
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="w-48 px-6 py-3 bg-accent text-accent-foreground font-bold rounded-lg shadow-lg hover:bg-accent-hover transition-colors duration-200 flex items-center justify-center gap-2"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          window.location.href = `/quote?product=${product.slug}`;
-                        }}
-                      >
-                        <ShoppingCart className="w-5 h-5" />
-                        GET QUOTE
-                      </motion.button>
-                      
-                      <Link
-                        href={`/${categorySlug}/${product.slug}`}
-                        className="w-48 px-6 py-3 bg-white text-foreground font-bold rounded-lg shadow-lg hover:bg-muted transition-colors duration-200 flex items-center justify-center gap-2 border-2 border-primary/20 hover:border-primary/40"
-                      >
-                        <Eye className="w-5 h-5" />
-                        VIEW DETAILS
-                      </Link>
-                    </motion.div>
-                  </div>
-                  {/* Product Info Section */}
-                  <div className="p-6 bg-primary">
-                    {/* Product Name - Uppercase, Bold */}
-                    <h3 className="text-xl font-bold text-accent mb-3 uppercase tracking-wide group-hover:text-accent transition-colors duration-300">
-                      {product.name}
-                    </h3>
-                    
-                    {/* Price - Accent Color */}
-                    <div className="mb-4">
-                      <span className="text-2xl font-bold text-accent">
-                        {productPrice}
-                      </span>
+                return (
+                  <motion.div
+                    key={product.id}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{
+                      duration: 0.6,
+                      delay: index * 0.1,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
+                    className="group h-full"
+                  >
+                    <div className="relative h-full bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-border/50 hover:border-accent/50 hover:-translate-y-2 bg-gradient-to-b from-white to-muted/20">
+                      {/* Top Accent Line */}
+                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-accent-hover to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                      {/* Image Section */}
+                      <div className="relative h-64 bg-white overflow-hidden flex items-center justify-center p-4">
+                        <Image
+                          src="/images/jacket.webp"
+                          alt={product.name}
+                          fill
+                          className="object-contain group-hover:scale-105 transition-transform duration-500"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          priority={index < 3}
+                        />
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          whileHover={{ opacity: 1 }}
+                          className="absolute inset-0 bg-primary/20 backdrop-blur-sm flex flex-col items-center justify-center gap-4 z-10 transition-opacity duration-300"
+                        >
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="w-48 px-6 py-3 bg-accent text-accent-foreground font-bold rounded-lg shadow-lg hover:bg-accent-hover transition-colors duration-200 flex items-center justify-center gap-2"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              window.location.href = `/quote?product=${product.slug}`;
+                            }}
+                          >
+                            <ShoppingCart className="w-5 h-5" />
+                            GET QUOTE
+                          </motion.button>
+                          <Link
+                            href={`/${categorySlug}/${product.slug}`}
+                            className="w-48 px-6 py-3 bg-white text-foreground font-bold rounded-lg shadow-lg hover:bg-muted transition-colors duration-200 flex items-center justify-center gap-2 border-2 border-primary/20 hover:border-primary/40"
+                          >
+                            <Eye className="w-5 h-5" />
+                            VIEW DETAILS
+                          </Link>
+                        </motion.div>
+                      </div>
+                      <div className="p-6 bg-primary">
+                        <h3 className="text-xl font-bold text-accent mb-3 uppercase tracking-wide group-hover:text-accent transition-colors duration-300">
+                          {product.name}
+                        </h3>
+                        <div className="mb-4">
+                          <span className="text-2xl font-bold text-accent">
+                            {productPrice}
+                          </span>
+                        </div>
+                        {product.description && (
+                          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                            {product.description}
+                          </p>
+                        )}
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-accent/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl" />
+                      </div>
                     </div>
-                    
-                    {/* Description */}
-                    {product.description && (
-                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                        {product.description}
-                      </p>
-                    )}
-
-                    {/* Bottom Accent Line */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-accent/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl" />
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -16,12 +16,12 @@ const steps = [
   {
     icon: Upload,
     title: 'Upload Your Artwork',
-    description: 'Send us your design files or artwork through our secure upload system.',
+    description: 'Send us your design files or artwork via our upload page – our team will review and respond.',
   },
   {
     icon: MessageSquare,
     title: 'Get a Quote',
-    description: 'Receive a detailed quote with pricing and turnaround times.',
+    description: 'Receive a detailed quote with pricing and turnaround times from our team.',
   },
   {
     icon: CheckCircle,
@@ -69,7 +69,7 @@ export default function ProcessSteps({ categoryId }: ProcessStepsProps) {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-accent mb-4">
             How It Works
           </h2>
-          <p className="text-lg text-white max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Our simple process makes it easy to get the printing services you need.
           </p>
         </motion.div>
@@ -155,7 +155,7 @@ export default function ProcessSteps({ categoryId }: ProcessStepsProps) {
                     </motion.div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-accent mb-3 group-hover:text-accent transition-colors duration-300">
                       {step.title}
                     </h3>
                     

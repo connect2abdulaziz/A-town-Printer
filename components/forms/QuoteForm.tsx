@@ -37,7 +37,7 @@ export default function QuoteForm() {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-success/10 mb-4">
           <CheckCircle className="w-8 h-8 text-success" />
         </div>
-        <h3 className="text-2xl font-bold text-foreground mb-2">Quote Request Sent!</h3>
+        <h3 className="text-2xl font-bold text-accent mb-2">Quote Request Sent!</h3>
         <p className="text-muted-foreground mb-6">
           We&apos;ve received your request and will get back to you within 24 hours.
         </p>
@@ -56,7 +56,7 @@ export default function QuoteForm() {
       {/* Row 1: Name and Email */}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label htmlFor="name" className="block text-sm font-semibold text-foreground">
+          <label htmlFor="name" className="block text-sm font-semibold text-accent">
             Full Name <span className="text-accent">*</span>
           </label>
           <input
@@ -64,13 +64,13 @@ export default function QuoteForm() {
             name="name"
             type="text"
             required
-            className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-colors"
+            className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-accent placeholder:text-muted-foreground focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/20 transition-colors"
             placeholder="John Doe"
           />
         </div>
 
         <div className="space-y-1.5">
-          <label htmlFor="email" className="block text-sm font-semibold text-foreground">
+          <label htmlFor="email" className="block text-sm font-semibold text-accent">
             Email Address <span className="text-accent">*</span>
           </label>
           <input
@@ -78,7 +78,7 @@ export default function QuoteForm() {
             name="email"
             type="email"
             required
-            className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-colors"
+            className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-accent placeholder:text-muted-foreground focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/20 transition-colors"
             placeholder="john@example.com"
           />
         </div>
@@ -87,26 +87,26 @@ export default function QuoteForm() {
       {/* Row 2: Phone and Category */}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label htmlFor="phone" className="block text-sm font-semibold text-foreground">
+          <label htmlFor="phone" className="block text-sm font-semibold text-accent">
             Phone Number
           </label>
           <input
             id="phone"
             name="phone"
             type="tel"
-            className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-colors"
+            className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-accent placeholder:text-muted-foreground focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/20 transition-colors"
             placeholder="+44 123 456 7890"
           />
         </div>
 
         <div className="space-y-1.5">
-          <label htmlFor="category" className="block text-sm font-semibold text-foreground">
+          <label htmlFor="category" className="block text-sm font-semibold text-accent">
             Service Category
           </label>
           <select
             id="category"
             name="category"
-            className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-colors"
+            className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-accent focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/20 transition-colors"
           >
             <option value="">Select a category</option>
             <option value="clothing">Clothing & Apparel Printing</option>
@@ -118,7 +118,7 @@ export default function QuoteForm() {
 
       {/* Row 3: Project Details */}
       <div className="space-y-1.5">
-        <label htmlFor="project-details" className="block text-sm font-semibold text-foreground">
+        <label htmlFor="project-details" className="block text-sm font-semibold text-accent">
           Project Details <span className="text-accent">*</span>
         </label>
         <textarea
@@ -126,21 +126,21 @@ export default function QuoteForm() {
           name="message"
           rows={4}
           required
-          className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-colors resize-none"
+          className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-accent placeholder:text-muted-foreground focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/20 transition-colors resize-none"
           placeholder="Tell us about your project, quantity, specifications, and any special requirements..."
         />
       </div>
 
       {/* Row 4: Quantity */}
       <div className="space-y-1.5">
-        <label htmlFor="quantity" className="block text-sm font-semibold text-foreground">
+        <label htmlFor="quantity" className="block text-sm font-semibold text-accent">
           Estimated Quantity
         </label>
         <input
           id="quantity"
           name="quantity"
           type="text"
-          className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-colors"
+          className="w-full rounded-lg border-2 border-border bg-white px-4 py-2.5 text-accent placeholder:text-muted-foreground focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/20 transition-colors"
           placeholder="e.g., 100 units, 500 pieces"
         />
       </div>

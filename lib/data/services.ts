@@ -2,6 +2,8 @@ export interface ServiceCategory {
   id: string;
   title: string;
   slug: string;
+  /** Short label for nav (keep simple and consistent) */
+  navLabel: string;
   shortDescription: string;
   description: string;
   examples: string[];
@@ -21,9 +23,10 @@ export const serviceCategories: ServiceCategory[] = [
     id: "clothing",
     title: "Clothing & Apparel Printing",
     slug: "clothing",
+    navLabel: "Clothing & Apparel",
     shortDescription: "Workwear, branded clothing, and apparel personalisation.",
     description:
-      "Professional workwear, branded clothing, and apparel personalisation. From team uniforms to promotional wear.",
+      "Professional workwear, branded clothing, and apparel personalisation with fast turnaround and reliable quality. From team uniforms to promotional wear.",
     examples: ["Workwear", "Branded clothing", "Apparel personalisation"],
     icon: "shirt",
   },
@@ -31,19 +34,21 @@ export const serviceCategories: ServiceCategory[] = [
     id: "large-format",
     title: "Large Format Printing & Displays",
     slug: "large-format",
+    navLabel: "Large Format & Displays",
     shortDescription: "Gazebos, banners, signage, and display products.",
     description:
-      "Gazebos, banners, signage, and display products for events, retail, and outdoor promotion.",
+      "Gazebos, banners, signage, and display products for events, retail, and outdoor promotion. Reliable production and fast turnaround.",
     examples: ["Gazebos", "Banners", "Signage", "Display products"],
     icon: "maximize",
   },
   {
     id: "print-marketing",
-    title: "Print Marketing Products",
+    title: "Print Marketing (Flyers, Posters, Business Cards)",
     slug: "print-marketing",
+    navLabel: "Print Marketing",
     shortDescription: "Flyers, posters, business cards, and poster boards.",
     description:
-      "Flyers, posters, business cards, poster boards, and other print marketing materials.",
+      "Flyers, posters, business cards, poster boards, and other print marketing materials. Professional quality with fast turnaround.",
     examples: ["Flyers", "Posters", "Business cards", "Poster boards"],
     icon: "file-text",
   },

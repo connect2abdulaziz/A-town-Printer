@@ -4,7 +4,7 @@ import { Clock, Shield, CheckCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Get a Quote | A-Town Printers',
-  description: 'Request a custom quote for your printing needs. Fast turnaround, competitive pricing, and professional service.',
+  description: 'Request a custom quote for your printing needs. Fast turnaround, reliable service, and professional print quality.',
 };
 
 export default function QuotePage() {
@@ -89,7 +89,7 @@ export default function QuotePage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-2xl shadow-xl border-2 border-border/50 p-6 lg:p-8 bg-gradient-to-b from-white to-muted/20">
               <div className="mb-6 pb-6 border-b border-border/50">
-                <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-2 text-center">Request a Quote</h2>
+                <h2 className="text-2xl lg:text-3xl font-bold text-accent mb-2 text-center">Request a Quote</h2>
                 <p className="text-muted-foreground text-sm text-center">
                   Fill out the form below and we&apos;ll get back to you with a detailed quote.
                 </p>

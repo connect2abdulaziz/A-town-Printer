@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone, Upload, MessageSquare } from 'lucide-react';
 import { serviceCategories } from '@/lib/data/services';
+import { CONTACT_PHONE } from '@/lib/constants';
+
+const TEL_HREF = `tel:+44${CONTACT_PHONE.trim().replace(/^0/, '').replace(/\s/g, '')}`;
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -85,7 +88,7 @@ export default function Header() {
             </Link>
 
             <a
-              href="tel:+44XXXXXXXXX"
+              href={TEL_HREF}
               className="flex items-center space-x-2 text-foreground hover:text-accent transition-colors"
             >
               <Phone className="w-4 h-4" />
@@ -160,7 +163,7 @@ export default function Header() {
                   </Link>
 
                   <a
-                    href="tel:+44XXXXXXXXX"
+                    href={TEL_HREF}
                     className="flex items-center space-x-3 p-3 bg-muted rounded-lg hover:bg-muted/70 transition-colors"
                   >
                     <Phone className="w-5 h-5 text-accent" />

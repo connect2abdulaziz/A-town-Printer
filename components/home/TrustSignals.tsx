@@ -6,38 +6,38 @@ import { Award, Clock, MapPin, Shield, Users, Zap } from 'lucide-react';
 const trustPoints = [
   {
     icon: MapPin,
-    title: 'UK-Based Excellence',
-    description: 'Proudly serving businesses across the United Kingdom with local expertise and support',
+    title: 'London-Based Excellence',
+    description: 'Proudly serving businesses across London with local expertise and reliable support',
     color: 'text-accent'
   },
   {
     icon: Clock,
     title: 'Fast Turnaround',
-    description: 'Quick production times without compromising on quality – perfect for urgent projects',
+    description: 'Quick production times without compromising on quality – ideal for urgent projects',
     color: 'text-success'
   },
   {
     icon: Award,
-    title: 'Years of Experience',
-    description: 'Trusted by businesses nationwide for professional printing solutions',
+    title: 'Professional Print Services',
+    description: 'Trusted by businesses nationwide for reliable, high-quality printing',
     color: 'text-primary'
   },
   {
     icon: Shield,
-    title: 'Quality Guaranteed',
-    description: 'Premium materials and printing techniques ensure exceptional results every time',
+    title: 'Reliability You Can Count On',
+    description: 'Premium materials and proven techniques ensure consistent, professional results',
     color: 'text-accent'
   },
   {
     icon: Users,
     title: 'Expert Team',
-    description: 'Dedicated specialists ready to help bring your vision to life',
+    description: 'Dedicated specialists ready to help bring your vision to life with personal service',
     color: 'text-success'
   },
   {
     icon: Zap,
-    title: 'Easy Process',
-    description: 'Upload artwork, request quotes, and track orders – all in one streamlined platform',
+    title: 'Simple Process',
+    description: 'Request a quote or upload your artwork – our team will respond with pricing and next steps.',
     color: 'text-primary'
   },
 ];
@@ -58,7 +58,7 @@ export default function TrustSignals() {
             Why Choose A-Town Printers?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We combine experience, quality, and speed to deliver printing services 
+            Fast turnaround, reliability, and professional print services 
             that help your business stand out.
           </p>
         </motion.div>
@@ -113,7 +113,7 @@ export default function TrustSignals() {
               { value: '10+', label: 'Years Experience' },
               { value: '5000+', label: 'Projects Completed' },
               { value: '24h', label: 'Rush Available' },
-              { value: '100%', label: 'UK Coverage' },
+              { value: '100%', label: 'London & Areas' },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -142,7 +142,7 @@ export default function TrustSignals() {
           className="mt-12 flex flex-wrap justify-center items-center gap-6"
         >
           {[
-            '🇬🇧 UK Based',
+            '🇬🇧 London Based',
             '✓ Quality Assured',
             '⚡ Fast Delivery',
             '💬 Expert Support',
