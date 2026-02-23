@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone, Upload, MessageSquare } from 'lucide-react';
 import { serviceCategories } from '@/lib/data/services';
@@ -33,9 +34,14 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span className="text-2xl font-bold text-accent-foreground">A</span>
-            </div>
+            <Image
+              src="/logo.png"
+              alt="A-Town Printers"
+              width={70}
+              height={70}
+              className="h-12 w-auto object-contain group-hover:opacity-90 transition-opacity"
+              priority
+            />
             <div className="flex flex-col">
               <span className="text-xl font-bold text-foreground">A-Town Printers</span>
               <span className="text-xs text-muted-foreground">Professional Printing Services</span>

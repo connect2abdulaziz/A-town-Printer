@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Shield, MapPinned } from 'lucide-react';
 import { serviceCategories } from '@/lib/data/services';
 import { AI_POLICY_TEXT, GOOGLE_MAPS_EMBED_URL, CONTACT_PHONE } from '@/lib/constants';
@@ -14,9 +15,17 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
-                <span className="text-2xl font-bold text-accent-foreground">A</span>
-              </div>
+            <Link href="/" className="flex items-center space-x-3 group">
+            <Image
+              src="/logo.png"
+              alt="A-Town Printers"
+              width={70}
+              height={70}
+              className="h-12 w-auto object-contain group-hover:opacity-90 transition-opacity"
+              priority
+            />
+          
+          </Link>
               <div>
                 <div className="text-lg font-bold">A-Town Printers</div>
                 <div className="text-xs text-primary-foreground/70">Since 2015</div>
