@@ -6,14 +6,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 
 const MAX_FILE_SIZE = 1024 * 1024 * 1024; // 1GB
+const MAX_FILES = 10;
 const ALLOWED_TYPES = [
   'image/jpeg',
   'image/png',
-  'image/pdf',
+  'image/gif',
+  'image/webp',
   'application/pdf',
   'application/zip',
   'application/postscript', // .ai
-  'image/vnd.adobe.photoshop' // .psd
+  'image/vnd.adobe.photoshop', // .psd
 ];
 
 export default function UploadForm() {
@@ -25,7 +27,7 @@ export default function UploadForm() {
 
   const validateFile = (file: File): string | null => {
     if (file.size > MAX_FILE_SIZE) {
-      return `${file.name} exceeds 1GB limit`;
+      return `${file.name} exceeds ${(MAX_FILE_SIZE / 1024 / 1024).toFixed(1)}MB limit`;
     }
     if (!ALLOWED_TYPES.includes(file.type) && !file.name.match(/\.(ai|eps|psd)$/i)) {
       return `${file.name} is not a supported file type`;
@@ -51,7 +53,10 @@ export default function UploadForm() {
 
     const droppedFiles = Array.from(e.dataTransfer.files);
     const validFiles: File[] = [];
-    
+    if (files.length + droppedFiles.length > MAX_FILES) {
+      setError(`Maximum ${MAX_FILES} files allowed.`);
+      return;
+    }
     for (const file of droppedFiles) {
       const validationError = validateFile(file);
       if (validationError) {
@@ -62,14 +67,17 @@ export default function UploadForm() {
     }
 
     setFiles(prev => [...prev, ...validFiles]);
-  }, []);
+  }, [files.length]);
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setError(null);
     if (e.target.files) {
       const selectedFiles = Array.from(e.target.files);
+      if (files.length + selectedFiles.length > MAX_FILES) {
+        setError(`Maximum ${MAX_FILES} files allowed.`);
+        return;
+      }
       const validFiles: File[] = [];
-      
       for (const file of selectedFiles) {
         const validationError = validateFile(file);
         if (validationError) {
@@ -97,50 +105,81 @@ export default function UploadForm() {
     setUploading(true);
     setError(null);
 
-    const formData = new FormData(e.currentTarget);
-    files.forEach(file => formData.append('files', file));
+    const form = e.currentTarget;
+    const name = (form.querySelector('[name="name"]') as HTMLInputElement)?.value?.trim();
+    const email = (form.querySelector('[name="email"]') as HTMLInputElement)?.value?.trim();
+    const phone = (form.querySelector('[name="phone"]') as HTMLInputElement)?.value?.trim();
+
+    if (!name || !email) {
+      setError('Name and email are required.');
+      setUploading(false);
+      return;
+    }
 
     try {
-      const response = await fetch('/api/upload', {
+      const uploadedFiles: { key: string; fileName: string; fileSize: number }[] = [];
+
+      for (const file of files) {
+        const res = await fetch('/api/upload/request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fileName: file.name,
+            fileSize: file.size,
+            contentType: file.type || undefined,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          setError(typeof data.error === 'string' ? data.error : 'Failed to get upload URL.');
+          return;
+        }
+        const { uploadUrl, key } = data;
+        if (!uploadUrl || !key) {
+          setError('Invalid response from server.');
+          return;
+        }
+
+        const putRes = await fetch(uploadUrl, {
+          method: 'PUT',
+          body: file,
+          headers: file.type ? { 'Content-Type': file.type } : {},
+        });
+        if (!putRes.ok) {
+          setError(`Upload failed for ${file.name}. Please try again.`);
+          return;
+        }
+        uploadedFiles.push({ key, fileName: file.name, fileSize: file.size });
+      }
+
+      const confirmRes = await fetch('/api/upload/confirm', {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: phone || undefined,
+          files: uploadedFiles,
+        }),
       });
 
-      if (!response.ok) throw new Error('Upload failed');
+      const confirmData = await confirmRes.json().catch(() => ({}));
+      if (!confirmRes.ok) {
+        setError(typeof confirmData.error === 'string' ? confirmData.error : 'Failed to save upload.');
+        return;
+      }
 
       setSuccess(true);
       setFiles([]);
+      setError(null);
+      form.reset();
       setTimeout(() => setSuccess(false), 5000);
-    } catch (err) {
+    } catch {
       setError('Upload failed. Please try again.');
     } finally {
       setUploading(false);
     }
   };
-
-  if (success) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-8"
-      >
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-success/10 mb-4">
-          <CheckCircle className="w-8 h-8 text-success" />
-        </div>
-        <h3 className="text-2xl font-bold text-accent mb-2">Files Uploaded Successfully!</h3>
-        <p className="text-muted-foreground mb-6">
-          We&apos;ve received your files and will review them shortly. We&apos;ll be in touch soon.
-        </p>
-        <Button
-          onClick={() => setSuccess(false)}
-          variant="outline"
-        >
-          Upload More Files
-        </Button>
-      </motion.div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -205,7 +244,7 @@ export default function UploadForm() {
             Drop files here or click to upload
           </p>
           <p className="text-sm text-muted-foreground">
-            Supports: JPG, PNG, PDF, AI, EPS, PSD, ZIP (max 1GB per file)
+            Supports: JPG, PNG, PDF, AI, EPS, PSD, ZIP (max 1GB per file, {MAX_FILES} files)
           </p>
         </div>
       </div>
@@ -243,6 +282,18 @@ export default function UploadForm() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Success Message */}
+      {success && (
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center gap-2 text-sm font-medium text-success"
+        >
+          <CheckCircle className="h-4 w-4 shrink-0" />
+          Files uploaded successfully.
+        </motion.p>
+      )}
 
       {/* Error Message */}
       {error && (

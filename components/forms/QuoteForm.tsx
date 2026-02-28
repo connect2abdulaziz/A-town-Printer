@@ -5,54 +5,59 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 
-export default function QuoteForm() {
+type QuoteFormProps = { product?: string };
+
+export default function QuoteForm({ product }: QuoteFormProps) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("loading");
+    setErrorMessage(null);
+    const form = e.currentTarget;
     try {
-      const formData = new FormData(e.currentTarget);
+      const formData = new FormData(form);
+      const payload: Record<string, string> = Object.fromEntries(
+        formData.entries() as IterableIterator<[string, string]>
+      );
+      if (product) payload.product = product;
+
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(Object.fromEntries(formData)),
+        body: JSON.stringify(payload),
       });
-      setStatus(res.ok ? "success" : "error");
-      if (res.ok) {
-        e.currentTarget.reset();
+
+      const statusCode = res.status;
+      const data = await res.json().catch(() => ({}));
+
+      const isSuccess =
+        statusCode === 201 ||
+        statusCode === 200 ||
+        (statusCode >= 200 && statusCode < 300) ||
+        Boolean(data?.id);
+
+      if (isSuccess) {
+        try {
+          form.reset();
+        } catch {
+          // ignore reset errors
+        }
+        setStatus("success");
+      } else {
+        setStatus("error");
+        setErrorMessage(typeof data.error === "string" ? data.error : "Something went wrong. Please try again.");
       }
     } catch {
       setStatus("error");
+      setErrorMessage("Something went wrong. Please try again.");
     }
-  }
-
-  if (status === "success") {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-8"
-      >
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-success/10 mb-4">
-          <CheckCircle className="w-8 h-8 text-success" />
-        </div>
-        <h3 className="text-2xl font-bold text-accent mb-2">Quote Request Sent!</h3>
-        <p className="text-muted-foreground mb-6">
-          We&apos;ve received your request and will get back to you within 24 hours.
-        </p>
-        <Button
-          onClick={() => setStatus("idle")}
-          variant="outline"
-        >
-          Submit Another Request
-        </Button>
-      </motion.div>
-    );
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {product && <input type="hidden" name="product" value={product} />}
       {/* Row 1: Name and Email */}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-1.5">
@@ -164,6 +169,18 @@ export default function QuoteForm() {
         </Button>
       </div>
 
+      {/* Success Message */}
+      {status === "success" && (
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center gap-2 text-sm font-medium text-success"
+        >
+          <CheckCircle className="h-4 w-4 shrink-0" />
+          Quote submitted successfully.
+        </motion.p>
+      )}
+
       {/* Error Message */}
       {status === "error" && (
         <motion.div
@@ -173,7 +190,7 @@ export default function QuoteForm() {
         >
           <AlertCircle className="w-4 h-4 shrink-0" />
           <p className="text-sm font-medium">
-            Something went wrong. Please try again or contact us directly.
+            {errorMessage ?? "Something went wrong. Please try again or contact us directly."}
           </p>
         </motion.div>
       )}
