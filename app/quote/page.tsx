@@ -7,7 +7,11 @@ export const metadata: Metadata = {
   description: 'Request a custom quote for your printing needs. Fast turnaround, reliable service, and professional print quality.',
 };
 
-export default function QuotePage() {
+type QuotePageProps = { searchParams?: Promise<{ product?: string }> | { product?: string } };
+
+export default async function QuotePage(props: QuotePageProps) {
+  const searchParams = await Promise.resolve(props.searchParams ?? {});
+  const product = typeof searchParams.product === "string" ? searchParams.product : undefined;
   const benefits = [
     {
       icon: Clock,
@@ -94,7 +98,7 @@ export default function QuotePage() {
                   Fill out the form below and we&apos;ll get back to you with a detailed quote.
                 </p>
               </div>
-              <QuoteForm />
+              <QuoteForm product={product} />
             </div>
           </div>
         </div>
