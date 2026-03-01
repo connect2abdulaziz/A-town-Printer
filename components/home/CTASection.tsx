@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Upload, MessageSquare, Phone } from 'lucide-react';
 import Link from 'next/link';
+import { CONTACT_PHONE, CONTACT_PHONE_DISPLAY } from '@/lib/constants';
 
 export default function CTASection() {
   return (
@@ -101,7 +102,7 @@ export default function CTASection() {
 
               {/* Contact CTA */}
               <Link
-                href="tel:+44XXXXXXXXX"
+                href={`tel:+${CONTACT_PHONE}`}
                 className="group bg-card hover:bg-muted text-card-foreground rounded-xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-border sm:col-span-2 lg:col-span-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
               >
                 <div className="flex items-start space-x-4">
@@ -114,7 +115,7 @@ export default function CTASection() {
                       Speak with our team for expert advice and support
                     </p>
                     <div className="flex items-center text-sm font-semibold text-success">
-                         07508 729 279
+                         {CONTACT_PHONE_DISPLAY}
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>

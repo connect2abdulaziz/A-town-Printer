@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Shield, MapPinned } from 'lucide-react';
 import { serviceCategories } from '@/lib/data/services';
-import { AI_POLICY_TEXT, GOOGLE_MAPS_EMBED_URL, CONTACT_PHONE } from '@/lib/constants';
+import { AI_POLICY_TEXT, GOOGLE_MAPS_EMBED_URL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY } from '@/lib/constants';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -152,13 +152,13 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
                 <a
-                  href={`tel:+44${CONTACT_PHONE.trim().replace(/^0/, '').replace(/\s/g, '')}`}
+                  href={`tel:+${CONTACT_PHONE}`}
                   className="flex items-start space-x-3 text-primary-foreground/80 hover:text-accent transition-colors group"
                 >
                   <Phone className="w-5 h-5 mt-0.5 group-hover:scale-110 transition-transform" />
                   <div>
                     <div className="text-sm font-medium">Call Us</div>
-                    <div className="text-sm">{CONTACT_PHONE.trim()}</div>
+                    <div className="text-sm">{CONTACT_PHONE_DISPLAY}</div>
                   </div>
                 </a>
               </li>

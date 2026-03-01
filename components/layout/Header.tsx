@@ -8,7 +8,7 @@ import { Menu, X, Phone, Upload, MessageSquare } from 'lucide-react';
 import { serviceCategories } from '@/lib/data/services';
 import { CONTACT_PHONE } from '@/lib/constants';
 
-const TEL_HREF = `tel:+44${CONTACT_PHONE.trim().replace(/^0/, '').replace(/\s/g, '')}`;
+const TEL_HREF = `tel:+${CONTACT_PHONE}`;
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
