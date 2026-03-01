@@ -1,7 +1,11 @@
 export const SITE_NAME = "A-Town Printers";
 
-/** Phone number for WhatsApp and tel: links (E.164 without +). Replace with real number. */
-export const CONTACT_PHONE = " 07508 729 279";
+/**
+ * Phone number for WhatsApp and tel: links.
+ * CONTACT_PHONE is E.164 digits without the leading + (e.g. 447415389254).
+ */
+export const CONTACT_PHONE = "447415389254";
+export const CONTACT_PHONE_DISPLAY = "+44 7415 389254";
 
 /** AI usage & accuracy notice (client-provided comprehensive disclaimer). */
 export const AI_POLICY_TEXT = `To enhance your experience, A-Town Printers utilizes advanced AI technologies (including LLMs and image generators).
